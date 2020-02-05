@@ -7,6 +7,18 @@ from State import State
 class World:
 
   def __init__(self, world_map):
+    """
+    Constructeur de la classe world.
+    
+    :param list(str) world_map: lignes de la carte.
+    """
+    # TODO : sauvegarder toute la map sous forme de grille ?
+    # self.rows = len(world_map)
+    # self.columns = max([len(line) for line in world_map])
+    # self.content = [self.rows]
+    # for i_l, line in enumerate(world_map):
+    #   for i_c, character in enumerate(line):
+
 
     self.team = None
     self.obstacles = []
@@ -64,7 +76,7 @@ class World:
 
   def is_breakages(self, position):
     for breakage in self.breakages:
-      if breakage.position.row == position.row and breakage.position.column == position.column:
+      if breakage.row == position.row and breakage.column == position.column:
         return breakage
     return None
   
@@ -140,7 +152,7 @@ class World:
   # Distance de manhattan ?
   # On pourrait aussi utiliser la distance euclidienne comme conseillé dans l'énoncé du tp
   def distance(self, n1, n2):
-    return abs(n1.position.row - n2.position.row) + abs(n1.position.column - n2.position.column) 
+    return abs(n1.row - n2.row) + abs(n1.column - n2.column) 
 
   # Je reviens sur ce dont on avait parlé mais
   # on peut envisager d'utiliser une classe Team qui effectue des actions
@@ -182,8 +194,8 @@ class World:
       if n1.parent:
         self.do_action(n1)
       # Pour tester
-      print(n1.position.row)
-      print(n1.position.column)
+      print(n1.row)
+      print(n1.column)
       closed.append(n1)
       # Si on a fini l'objectif, on sort de la boucle
       if self.goal():
@@ -203,10 +215,10 @@ class World:
   # de la zone limitée par des obstacles ou alors il n'y aura pas de sol possible
   def neighbours_path(self, cell):
     neighbours = []
-    north = Position(cell.position.row - 1, cell.position.column)
-    south = Position(cell.position.row + 1, cell.position.column)
-    east = Position(cell.position.row, cell.position.column + 1)
-    west = Position(cell.position.row, cell.position.column - 1)
+    north = Position(cell.row - 1, cell.column)
+    south = Position(cell.row + 1, cell.column)
+    east = Position(cell.row, cell.column + 1)
+    west = Position(cell.row, cell.column - 1)
     # North
     if not self.is_obstacles(north):
       neighbours.append(State(north))
@@ -226,7 +238,7 @@ class World:
     for e in l:
       # On pourrait peut être déplacer ça dans la classe positions en 
       # ajoutant la possibilité de comparer des positions via des opérateurs < = > <= etc..
-      if e.position.row == s.position.row and e.position.column == s.position.column and s.g < e.g:
+      if e.row == s.row and e.column == s.column and s.g < e.g:
         return e
     return None
 
@@ -243,11 +255,11 @@ class World:
       # On prend le premier element de la liste open
       n1 = open_l.pop(0)
       closed.append(n1)
-      if n1.position.row == dest.position.row and n1.position.column == dest.position.column:
+      if n1.row == dest.row and n1.column == dest.column:
         return closed
       next_node = self.neighbours_path(n1)
       for n2 in next_node:
-        n2.g = n1.g + 1 + (abs(n1.position.row - n1.position.row)+abs(n1.position.column - n1.position.column))
+        n2.g = n1.g + 1 + (abs(n1.row - n1.row)+abs(n1.column - n1.column))
         n2.parent = n1
         n3 = self.state_in_list(n2, open_l)
         if n3 != None:

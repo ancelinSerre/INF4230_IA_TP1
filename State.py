@@ -11,4 +11,8 @@ class State:
 
   @property
   def row(self):
-      return self.parent.row
+    return self.position.row
+
+  @property
+  def column(self):
+    return self.position.column
