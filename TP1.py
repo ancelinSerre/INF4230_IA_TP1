@@ -84,8 +84,11 @@ if __name__ == "__main__":
     w = World(lines)
     w.link_switch_breakages()
     #w.find_in_graph(w.team)
-    path = w.find_path(State(Position(5,1)), State(Position(5,3)))
-    
+    '''
+    path = w.find_path(State(Position(20,30)), State(Position(2,4)))
+    '''
+    result = w.find_in_graph(w.team)
+    '''
     for p in path:
       print(p.position.row, end=" ")
       print(p.position.column)
@@ -93,6 +96,7 @@ if __name__ == "__main__":
         print("parent ", end="")
         print(p.parent.position.row,end=" ")
         print(p.parent.position.column)
+        '''
 
 
 
