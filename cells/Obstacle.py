@@ -1,4 +1,3 @@
-
 from cells.Cell import Cell
 
 
@@ -18,7 +17,8 @@ class Obstacle(Cell):
         :param Position position: position de l'obstacle dans le monde.
         """
         super().__init__(position)
-        
+
+
     def is_accessible(self):
         """
         Méthode indiquant si l'équipe de réparation peut se déplacer
@@ -29,14 +29,16 @@ class Obstacle(Cell):
         """
         return False
 
+
     def __str__(self):
         """
-        Méthode permettant l'affichage de l'obstacle. 
-        
+        Méthode permettant l'affichage de l'obstacle.
+
         :return: représentation textuelle de l'obstacle.
         :rtype: str
         """
         return f"Obstacle({self.x}, {self.y})"
+
 
     def get_type(self):
         """

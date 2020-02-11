@@ -1,4 +1,3 @@
-
 from cells.Cell import Cell
 
 
@@ -22,14 +21,16 @@ class PowerSource(Cell):
         """
         super().__init__(position)
 
+
     def __str__(self):
         """
-        Méthode permettant l'affichage de la source d'énergie. 
-        
+        Méthode permettant l'affichage de la source d'énergie.
+
         :return: représentation textuelle de la source.
         :rtype: str
         """
         return f"PowerSource({self.x}, {self.y})"
+
 
     def get_type(self):
         """

@@ -1,4 +1,3 @@
-
 from cells.Cell import Cell
 
 
@@ -11,8 +10,6 @@ class House(Cell):
     de réparation.
     - Une maison est alimentée ou non par au moins une
     ligne électrique.
-
-    (A ajouter peut-être) :
     - Une maison sait pendant combien d'unités de temps
     elle n'a pas été alimentée.
     """
@@ -37,6 +34,7 @@ class House(Cell):
         # (déplacements/interrupteurs ON;OFF/réparations)
         self.outage_time = 0
 
+
     @property
     def is_powered(self):
         """
@@ -46,6 +44,7 @@ class House(Cell):
         :rtype: bool
         """
         return self._is_powered
+
 
     @is_powered.setter
     def is_powered(self, powered):
@@ -61,6 +60,7 @@ class House(Cell):
         else:
             raise TypeError("Argument 'powered' must be a boolean")
 
+
     def __str__(self):
         """
         Méthode permettant l'affichage de la maison. 
@@ -72,6 +72,7 @@ class House(Cell):
         status_str = f"-> status: {powered_status}"
         outage_str = f"-> outage time: {self.outage_time}"
         return f"House({self.x}, {self.y}) [\n{status_str}\n{outage_str}\n]"
+
 
     def get_type(self):
         """

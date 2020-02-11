@@ -1,4 +1,3 @@
-
 from cells.Cell import Cell
 
 
@@ -6,8 +5,8 @@ class PowerLine(Cell):
     """
     Class PowerLine représentant une ligne électrique.
 
-    - Lorsqu'elle est alimentée, une ligne électrique 
-    fournit du courant à toutes ses cellules voisines 
+    - Lorsqu'elle est alimentée, une ligne électrique
+    fournit du courant à toutes ses cellules voisines
     (Nord, Sud, Est, Ouest).
     - Une ligne électrique est alimentée lorsqu'elle
     est reliée sur un réseau en état de marche.
@@ -30,6 +29,7 @@ class PowerLine(Cell):
         else:
             raise TypeError("Argument 'is_down' must be a boolean")
 
+
     def is_accessible(self):
         """
         Méthode indiquant si l'équipe de réparation peut se déplacer
@@ -38,18 +38,21 @@ class PowerLine(Cell):
         :return: le statut d'accessibilité de la ligne.
         :rtype: bool
         """
-        #### MAL FAIT A REFAIRE
-        return not self.is_down
+        # On peut accéder à la ligne si elle n'est pas en panne
+        # ou si elle est en panne et non alimentée.
+        return not self.is_down or (not self.powered and self.is_down)
+
 
     def __str__(self):
         """
-        Méthode permettant l'affichage de la ligne électrique. 
-        
+        Méthode permettant l'affichage de la ligne électrique.
+
         :return: représentation textuelle de la ligne.
         :rtype: str
         """
         status = "down" if self.is_down else "working"
         return f"PowerLine({self.x}, {self.y}) [\n-> status: {status}\n]"
+
 
     def get_type(self):
         """

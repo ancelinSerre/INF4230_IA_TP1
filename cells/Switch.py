@@ -1,6 +1,4 @@
-
 from cells.Cell import Cell
-
 
 class Switch(Cell):
     """
@@ -36,8 +34,7 @@ class Switch(Cell):
         # Réseau dont l'interrupteur est responsable.
         # Sera mis à jour dans la phase d'analyse du monde.
         self.network = {
-            "switches": [],
-            "power_lines": [],
+            "breakages": [],
             "houses": []
         }
 
@@ -53,7 +50,7 @@ class Switch(Cell):
         :return: état du réseau (fonctionnel/endommagé)
         :rtype: bool
         """
-        return any([pline.is_down for pline in self.network["power_lines"]])
+        return len(self.network["breakages"]) == 0
 
     def is_accessible(self):
         """
